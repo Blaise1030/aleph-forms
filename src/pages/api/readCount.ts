@@ -21,7 +21,7 @@ export default async function handler(
     return res
       .status(405)
       .json({status: "failed", error: "Method Not Allowed"});
-  const jsonDirectory = path.join("json");
+  const jsonDirectory = path.join(process.cwd(), "json");
   const fileContents = await fs.readFile(jsonDirectory + "/data.json", "utf8");
   const data: {runningNumber: number; data: TFormFields[]} =
     JSON.parse(fileContents);
