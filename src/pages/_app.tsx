@@ -4,7 +4,6 @@ import "@/styles/globals.css";
 import type {AppProps} from "next/app";
 import {Toaster} from "@/components/ui/toaster";
 import React from "react";
-import {appWithTranslation} from "next-i18next";
 
 function App({Component, pageProps}: AppProps) {
   const [queryClient] = React.useState(() => new QueryClient());
