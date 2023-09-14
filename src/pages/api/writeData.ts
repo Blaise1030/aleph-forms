@@ -31,7 +31,7 @@ export default async function handler(
   try {
     await FullSchema.parseAsync(JSON.parse(req.body));
     const userInput: z.infer<typeof FullSchema> = JSON.parse(req.body);
-    const jsonDirectory = path.join(process.cwd(), "json");
+    const jsonDirectory = path.join("json");
     const fileContents = await fs.readFile(
       jsonDirectory + "/data.json",
       "utf8"
