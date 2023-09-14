@@ -1,0 +1,34 @@
+{
+  "en": {
+    "yourPastRecords": "Your past records",
+    "noRecordsFound": "No Records Found :(",
+    "submissionReceived": "We have received your submission!",
+    "submissionDetails": "Your submission details are as follows. Please verify that the data is correct.",
+    "username": "Username",
+    "runningNumber": "Running Number",
+    "email": "Email",
+    "age": "Age",
+    "phoneNumber": "Phone Number",
+    "preferredLanguage": "Preferred Language",
+    "recordSubmission": "Record Submission",
+    "listOfRecords": "Here's a list of records that you have submitted!",
+    "fetchingRecords": "Fetching Your Records...",
+    "fetchAllRecords": "Fetch All Records"
+  },
+  "bm": {
+    "yourPastRecords": "Rekod anda yang lepas",
+    "noRecordsFound": "Tiada Rekod Ditemui :(",
+    "submissionReceived": "Kami telah menerima penghantaran anda!",
+    "submissionDetails": "Butiran penghantaran anda adalah seperti berikut. Sila sahkan bahawa data adalah betul.",
+    "username": "Nama",
+    "runningNumber": "Nombor Larian",
+    "email": "Emel",
+    "age": "Umur",
+    "phoneNumber": "Nombor Telefon",
+    "preferredLanguage": "Bahasa",
+    "recordSubmission": "Penyerahan Rekod",
+    "listOfRecords": "Berikut adalah senarai rekod yang anda telah hantar!",
+    "fetchingRecords": "Mengambil Rekod Anda...",
+    "fetchAllRecords": "Ambil Semua Rekod"
+  }
+}

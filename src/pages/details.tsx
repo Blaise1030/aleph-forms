@@ -1,37 +1,52 @@
 import Navbar from "@/components/nabar";
 import {Button} from "@/components/ui/button";
 import {
-  Form,
-  FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
+  FormControl,
+  FormDescription,
   FormMessage,
+  Form,
 } from "@/components/ui/form";
 import {Input} from "@/components/ui/input";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {useRouter} from "next/router";
+import {useEffect} from "react";
 import {useForm} from "react-hook-form";
-import {z} from "zod";
 import Lottie from "react-lottie-player";
+import {z} from "zod";
 import dark from "../assets/dark.json";
-import light from "../assets/light.json";
 
-export const MainSchema = z.object({
-  username: z.string().min(3, "Username has to be at least 3 characters"),
-  email: z.string().email("Invalid email address"),
+export const DetailsSchema = z.object({
+  phone: z
+    .string()
+    .regex(
+      /^(\+?6?01)[0-46-9]-*[0-9]{7,8}$/,
+      "Please enter a valid phone number"
+    ),
+  age: z.string().refine(
+    (v) => {
+      const parsed = parseInt(v);
+      return !isNaN(parsed) && parsed > 0;
+    },
+    {message: "A Valid Age is Required"}
+  ),
 });
 
-export default function Home() {
-  const form = useForm<z.infer<typeof MainSchema>>({
-    defaultValues: {username: "", email: ""},
-    resolver: zodResolver(MainSchema),
+export default function Details() {
+  const form = useForm<z.infer<typeof DetailsSchema>>({
+    defaultValues: {age: "", phone: ""},
+    resolver: zodResolver(DetailsSchema),
   });
   const router = useRouter();
 
-  function onSubmit(data: any) {
-    router.push({pathname: "/details", query: data});
+  useEffect(() => {
+    if (Object.keys(router.query).length === 0) router.push("/");
+  }, []);
+
+  function onSubmit(a: any) {
+    router.push({pathname: "/localisation", query: {...router.query, ...a}});
   }
 
   return (
@@ -49,7 +64,6 @@ export default function Home() {
           }}
         />
       </div>
-
       <div className="top-0 left-0 items-center justify-center hidden md:flex">
         <div className="">
           <Lottie
@@ -60,24 +74,23 @@ export default function Home() {
           />
         </div>
       </div>
-
       <div className="flex flex-col space-y-2 min-h-screen p-4 md:max-w-sm max-w-md m-auto justify-center w-full">
         <p className="text-xl font-bold tracking-tight pb-4">
-          Step 1: Tell Us More About You.
+          Step 2: Still, tell us more.
         </p>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
             <FormField
               control={form.control}
-              name="username"
+              name="phone"
               render={({field}) => (
                 <FormItem>
-                  <FormLabel>Username</FormLabel>
+                  <FormLabel>Phone</FormLabel>
                   <FormControl>
                     <Input
-                      className="bg-background"
-                      placeholder="Name"
+                      placeholder="Phone"
                       {...field}
+                      className="bg-background"
                     />
                   </FormControl>
                   <FormMessage />
@@ -86,25 +99,25 @@ export default function Home() {
             />
             <FormField
               control={form.control}
-              name="email"
+              name="age"
               render={({field}) => (
                 <FormItem>
-                  <FormLabel>Email</FormLabel>
+                  <FormLabel>Age</FormLabel>
                   <FormControl>
                     <Input
-                      className="bg-background"
-                      placeholder="Email"
+                      placeholder="Age"
                       {...field}
+                      className="bg-background"
                     />
                   </FormControl>
                   <FormDescription>
-                    We will never share your email. Ever.
+                    {"We won't reveal your age also "}
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <div />
+            <div></div>
             <Button type="submit" variant={"outline"}>
               Next
             </Button>
